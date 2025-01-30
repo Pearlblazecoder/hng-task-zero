@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         "github_url" => $github_url
     ];
 
-    echo json_encode($response);
+    echo json_encode($response, JSON_UNESCAPED_SLASHES);
 } else {
     http_response_code(405);
     echo json_encode(["error" => "Only GET requests are allowed."]);
