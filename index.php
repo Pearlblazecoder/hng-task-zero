@@ -1,18 +1,16 @@
 <?php
 
-// Enable CORS for ALL origins 
-header("Access-Control-Allow-Origin: *"); 
+// Enable CORS for any origin (use carefully in production)
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Content-Type: application/json; charset=UTF-8");
 
 // Handle Preflight OPTIONS Request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header('Access-Control-Allow-Methods: GET'); 
-    header('Access-Control-Allow-Headers: Content-Type, Authorization'); 
     http_response_code(204);
     exit;
 }
-
-// Set content type for actual responses
-header("Content-Type: application/json; charset=UTF-8");
 
 // Handle GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
