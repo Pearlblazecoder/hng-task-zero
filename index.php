@@ -6,12 +6,32 @@ $allowed_origins = [
     'https://hng-task-zero-production.up.railway.app/', 
 ];
 
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    $origin = $_SERVER['HTTP_ORIGIN'];
 
-// Set content type and allow GET requests
+    // Check if the origin is allowed
+    if (in_array($origin, $allowedOrigins)) {
+        header("Access-Control-Allow-Origin: {$origin}"); 
+    } else {
+        http_response_code(403);
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode(["error" => "Origin not allowed."]);
+        exit;
+    }
+
+    // Handle Preflight OPTIONS Request
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        header('Access-Control-Allow-Methods: GET'); 
+        header('Access-Control-Allow-Headers: Content-Type, Authorization'); 
+        http_response_code(204);
+        exit;
+    }
+}
+
+// Set content type for actual responses
 header("Content-Type: application/json; charset=UTF-8");
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
+// Handle GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $email = "favourudoh2020@gmail.com";
     $current_datetime = gmdate("Y-m-d\TH:i:s\Z");
