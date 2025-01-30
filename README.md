@@ -14,7 +14,7 @@ This is a simple public API that returns an email address, the current datetime,
 
 ### Endpoint
 
-`GET http://localhost:8000` for local development sever, or 
+`GET http://localhost:8000/api.php` for local development sever, or 
 `GET http://yourdomain.com` for production server.
 
 ### Request/Response Format
