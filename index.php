@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // Handle GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $email = "favourudoh2020@gmail.com";
-    $current_datetime = gmdate("Y-m-d\TH:i:s\Z");
+    $datetime = new DateTime('now', new DateTimeZone('UTC'));
+    $current_datetime = $datetime->format('Y-m-d\TH:i:s.v\Z');
     $github_url = "https://github.com/Pearlblazecoder/hng-task-zero";
 
     $response = [
